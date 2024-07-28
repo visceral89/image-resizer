@@ -1,3 +1,4 @@
+from tkinterdnd2 import DND_FILES, TkinterDnD
 import customtkinter as ctk
 from tkinter import filedialog
 from PIL import Image
