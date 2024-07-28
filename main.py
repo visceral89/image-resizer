@@ -32,7 +32,7 @@ def open_folder():
 
 
 ctk.set_appearance_mode("Dark")
-ctk.set_default_color_theme("blue")
+ctk.set_default_color_theme("green")
 
 
 # APP SETUP
