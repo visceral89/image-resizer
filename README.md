@@ -1,2 +1,22 @@
-# image-resizer
- 
+# Image Resizer Tool
+
+## Overview
+
+This Image Resizer Tool is a desktop application designed to help users quickly resize images to multiple predefined dimensions. It supports various formats including JPG, PNG, and GIF (including animated GIFs). The application offers a simple drag-and-drop interface for ease of use.
+
+## Features
+
+- **Multiple Size Outputs**: Automatically resizes images to 28px, 56px, 112px, and 512px.
+- **Drag-and-Drop Functionality**: Users can drag and drop a folder directly onto the application window.
+- **Output Folder**: Automatically saves resized images in a subfolder called 'resized' within the original folder.
+- **Custom Naming Convention**: Resized images are saved with their size appended to the filename (e.g., `filename@size.png`).
+- **Support for Animated GIFs**: Properly handles resizing of animated GIFs by processing each frame to maintain the animation.
+
+## Installation
+
+### Prerequisites
+
+- Python 3.x
+- Pillow library
+- customtkinter library
+- tkinterdnd2 library

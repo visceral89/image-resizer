@@ -6,6 +6,9 @@ import os
 sizes = [28, 56, 112, 512]
 
 # 28, 56, 112, 512
+# Fix filenames to {file}@{size}px"
+# Todo: Make draggable folder in window, run resize_images function
+# Open Folder on Complete
 
 
 def resize_images(folder_path, output_sizes):
@@ -20,7 +23,7 @@ def resize_images(folder_path, output_sizes):
 
             for size in output_sizes:
                 resized_img = img.resize((size, size))
-                resized_img.save(os.path.join(output_folder, f"{size}px_{file}"))
+                resized_img.save(os.path.join(output_folder, f"{size}px-{file}"))
 
 
 def open_folder():
