@@ -19,7 +19,7 @@ def resize_images(folder_path, output_sizes):
             img = Image.open(image_path)
 
             for size in output_sizes:
-                resized_img = img.resize((size, size), Image.ANTIALIAS)
+                resized_img = img.resize((size, size))
                 resized_img.save(os.path.join(output_folder, f"{size}px_{file}"))
 
 
