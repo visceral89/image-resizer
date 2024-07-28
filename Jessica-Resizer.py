@@ -1,10 +1,21 @@
 from tkinterdnd2 import DND_FILES, TkinterDnD
 import customtkinter as ctk
-from tkinter import filedialog
+from tkinter import filedialog, StringVar, TOP
 from PIL import Image
 import os
 
 sizes = [28, 56, 112, 512]
+
+
+class Tk(ctk.CTk, TkinterDnD.DnDWrapper):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.TkdndVersion = TkinterDnD._require(self)
+
+
+ctk.set_appearance_mode("Dark")
+ctk.set_default_color_theme("green")
+
 
 # 28, 56, 112, 512
 # Fix filenames to {file}@{size}px"
@@ -44,26 +55,24 @@ def open_folder():
         label.config(text=f"Images resized in {folder_selected}/resized")
 
 
-ctk.set_appearance_mode("Dark")
-ctk.set_default_color_theme("green")
-
-
 # APP SETUP
-app = ctk.CTk()
-app.title("Jessicas Batcher")
-app.geometry("400x300")
-app.minsize(400, 300)
-app.maxsize(1920, 1080)
+root = Tk()
+root.title("Jessica Resizer")
+root.geometry("400x300")
+root.minsize(400, 300)
+root.maxsize(1920, 1080)
 
 # MAIN FRAME
 
-frame = ctk.CTkFrame(master=app)
+frame = ctk.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
+frame.drop_target_register(DND_FILES)
+frame.dnd_bind("<<Drop>>", drop)
 
-label = ctk.CTkLabel(master=frame, text="Select a folder", font=("Inter", 32))
+label = ctk.CTkLabel(master=frame, text="Drag Folder Here", font=("Inter", 32))
 label.pack(pady=20)
 
 button = ctk.CTkButton(master=frame, text="Select Folder", command=open_folder)
 button.pack(pady=50)
 
-app.mainloop()
+root.mainloop()
