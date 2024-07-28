@@ -36,10 +36,10 @@ ctk.set_default_color_theme("green")
 
 
 def drop(event):
-    folder_path = event.data
+    folder_path = event.data.replace("{", "").replace("}", "")
     if os.path.isdir(folder_path):
         resize_images(folder_path, sizes)
-        label.config(text=f"Images resized in {folder_path}/resized")
+        label.configure(text=f"Images resized in {folder_path}/resized")
         os.startfile(os.path.join(folder_path, "resized"))
 
 
@@ -75,7 +75,7 @@ def open_folder():
     folder_selected = filedialog.askdirectory(initialdir=initial_directory)
     if folder_selected:
         resize_images(folder_selected, sizes)
-        label.config(text=f"Images resized in {folder_selected}/resized")
+        label.configure(text=f"Images resized in {folder_selected}/resized")
 
 
 def resize_gif(image_path, output_path, size):
