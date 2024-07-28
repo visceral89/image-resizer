@@ -11,6 +11,14 @@ sizes = [28, 56, 112, 512]
 # Open Folder on Complete
 
 
+def drop(event):
+    folder_path = event.data
+    if os.path.isdir(folder_path):
+        resize_images(folder_path, sizes)
+        label.config(text=f"Images resized in {folder_path}/resized")
+        os.startfile(os.path.join(folder_path, "resized"))
+
+
 def resize_images(folder_path, output_sizes):
     output_folder = os.path.join(folder_path, "resized")
     if not os.path.exists(output_folder):
@@ -24,6 +32,7 @@ def resize_images(folder_path, output_sizes):
             for size in output_sizes:
                 resized_img = img.resize((size, size))
                 resized_img.save(os.path.join(output_folder, f"{size}px-{file}"))
+    os.startfile(os.path.join(output_folder))
 
 
 def open_folder():
