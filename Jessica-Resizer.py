@@ -19,9 +19,7 @@ ctk.set_default_color_theme("green")
 
 
 # 28, 56, 112, 512
-# Fix filenames to {file}@{size}px"
-# Todo: Make draggable folder in window, run resize_images function
-# Open Folder on Complete
+# installer command  "pyinstaller --onefile --windowed --icon=picture.ico Jessica-Resizer.py"
 
 
 def drop(event):
@@ -55,13 +53,6 @@ def resize_images(folder_path, output_sizes):
                     resized_img.save(
                         os.path.join(output_folder, f"{file_name}@{size}{file_ext}")
                     )
-
-    """
-    for file in os.listdir(folder_path):
-        if file.lower().endswith((".png", ".jpg", ".jpeg", ".gif")):
-            image_path = os.path.join(folder_path, file)
-            img = Image.open(image_path)
-    """
 
     os.startfile(os.path.join(output_folder))
 
