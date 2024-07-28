@@ -1,7 +1,7 @@
 from tkinterdnd2 import DND_FILES, TkinterDnD
 import customtkinter as ctk
 from tkinter import filedialog, StringVar, TOP
-from PIL import Image
+from PIL import Image, ImageSequence
 import os
 
 sizes = [28, 56, 112, 512]
@@ -42,12 +42,19 @@ def resize_images(folder_path, output_sizes):
         file_name, file_ext = os.path.splitext(file)
         if file_ext.lower() in extentions:
             image_path = os.path.join(folder_path, file)
-            img = Image.open(image_path)
-            for size in output_sizes:
-                resized_img = img.resize((size, size))
-                resized_img.save(
-                    os.path.join(output_folder, f"{file_name}@{size}{file_ext}")
-                )
+            if file_ext.lower() == ".gif":
+                for size in output_sizes:
+                    output_path = os.path.join(
+                        output_folder, f"{file_name}@{size}{file_ext}"
+                    )
+                    resize_gif(image_path, output_path, size)
+            else:
+                img = Image.open(image_path)
+                for size in output_sizes:
+                    resized_img = img.resize((size, size))
+                    resized_img.save(
+                        os.path.join(output_folder, f"{file_name}@{size}{file_ext}")
+                    )
 
     """
     for file in os.listdir(folder_path):
@@ -65,6 +72,25 @@ def open_folder():
     if folder_selected:
         resize_images(folder_selected, sizes)
         label.config(text=f"Images resized in {folder_selected}/resized")
+
+
+def resize_gif(image_path, output_path, size):
+    img = Image.open(image_path)
+    frames = []
+
+    for frame in ImageSequence.Iterator(img):
+        frame = frame.convert("RGBA")
+        resized_frame = frame.resize((size, size))
+        frames.append(resized_frame)
+
+    frames[0].save(
+        output_path,
+        save_all=True,
+        append_images=frames[1:1],
+        optimize=False,
+        loop=1,
+        duration=img.info["duration"],
+    )
 
 
 # APP SETUP
