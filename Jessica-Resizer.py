@@ -5,6 +5,7 @@ from PIL import Image
 import os
 
 sizes = [28, 56, 112, 512]
+extentions = [".png", ".jpg", ".jpeg", ".gif"]
 
 
 class Tk(ctk.CTk, TkinterDnD.DnDWrapper):
@@ -33,17 +34,28 @@ def drop(event):
 
 def resize_images(folder_path, output_sizes):
     output_folder = os.path.join(folder_path, "resized")
+    # Make sure the folder excist, otherwise create it.
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
     for file in os.listdir(folder_path):
+        file_name, file_ext = os.path.splitext(file)
+        if file_ext.lower() in extentions:
+            image_path = os.path.join(folder_path, file)
+            img = Image.open(image_path)
+            for size in output_sizes:
+                resized_img = img.resize((size, size))
+                resized_img.save(
+                    os.path.join(output_folder, f"{file_name}@{size}{file_ext}")
+                )
+
+    """
+    for file in os.listdir(folder_path):
         if file.lower().endswith((".png", ".jpg", ".jpeg", ".gif")):
             image_path = os.path.join(folder_path, file)
             img = Image.open(image_path)
+    """
 
-            for size in output_sizes:
-                resized_img = img.resize((size, size))
-                resized_img.save(os.path.join(output_folder, f"{size}px-{file}"))
     os.startfile(os.path.join(output_folder))
 
 
