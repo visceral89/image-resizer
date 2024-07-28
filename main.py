@@ -47,10 +47,10 @@ app.maxsize(1920, 1080)
 frame = ctk.CTkFrame(master=app)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-label = ctk.CTkLabel(master=frame, text="Select a folder", font=("Inter", 24))
+label = ctk.CTkLabel(master=frame, text="Select a folder", font=("Inter", 32))
 label.pack(pady=20)
 
 button = ctk.CTkButton(master=frame, text="Select Folder", command=open_folder)
-button.pack(pady=10)
+button.pack(pady=50)
 
 app.mainloop()
