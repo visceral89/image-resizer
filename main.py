@@ -1,4 +1,4 @@
-import tkinter as tk
+import customtkinter as ctk
 from tkinter import filedialog
 from PIL import Image
 import os
@@ -31,13 +31,19 @@ def open_folder():
         label.config(text=f"Images resized in {folder_selected}/resized")
 
 
-app = tk.Tk()
-app.title("Jessicas Batcher")
+ctk.set_appearance_mode("Dark")
+ctk.set_default_color_theme("blue")
 
-label = tk.Label(app, text="Select a folder to resize images")
+app = ctk.CTk()
+app.title("Jessicas Batcher")
+app.geometry("400x300")
+app.minsize(400, 300)
+app.maxsize(1920, 1080)
+
+label = ctk.CTkLabel(app, text="Select a folder to resize images")
 label.pack(pady=20)
 
-button = tk.Button(app, text="Select Folder", command=open_folder)
+button = ctk.CTkButton(app, text="Select Folder", command=open_folder)
 button.pack(pady=10)
 
 app.mainloop()
