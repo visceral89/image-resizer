@@ -34,16 +34,23 @@ def open_folder():
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("blue")
 
+
+# APP SETUP
 app = ctk.CTk()
 app.title("Jessicas Batcher")
 app.geometry("400x300")
 app.minsize(400, 300)
 app.maxsize(1920, 1080)
 
-label = ctk.CTkLabel(app, text="Select a folder to resize images")
+# MAIN FRAME
+
+frame = ctk.CTkFrame(master=app)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
+
+label = ctk.CTkLabel(master=frame, text="Select a folder", font=("Inter", 24))
 label.pack(pady=20)
 
-button = ctk.CTkButton(app, text="Select Folder", command=open_folder)
+button = ctk.CTkButton(master=frame, text="Select Folder", command=open_folder)
 button.pack(pady=10)
 
 app.mainloop()
