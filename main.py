@@ -24,7 +24,8 @@ def resize_images(folder_path, output_sizes):
 
 
 def open_folder():
-    folder_selected = filedialog.askdirectory()
+    initial_directory = os.path.expanduser("~/Pictures")
+    folder_selected = filedialog.askdirectory(initialdir=initial_directory)
     if folder_selected:
         resize_images(folder_selected, sizes)
         label.config(text=f"Images resized in {folder_selected}/resized")
