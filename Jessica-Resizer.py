@@ -1,8 +1,21 @@
+import os
+import sys
+
+# Add the path to the tkdnd library
+tkdnd_library_path = "./tkdnd"
+if getattr(sys, "frozen", False):
+    # If running in a PyInstaller bundle
+    base_path = sys._MEIPASS
+    tkdnd_library_path = os.path.join(base_path, "tkdnd")
+
+os.environ["TKDND_LIBRARY"] = tkdnd_library_path
+
 from tkinterdnd2 import DND_FILES, TkinterDnD
+import tkdnd
 import customtkinter as ctk
 from tkinter import filedialog, StringVar, TOP
 from PIL import Image, ImageSequence
-import os
+
 
 sizes = [28, 56, 112, 512]
 extentions = [".png", ".jpg", ".jpeg", ".gif"]
@@ -19,7 +32,7 @@ ctk.set_default_color_theme("green")
 
 
 # 28, 56, 112, 512
-# installer command  "pyinstaller --onefile --windowed --icon=picture.ico Jessica-Resizer.py"
+# installer command  "pyinstaller --onefile --windowed --add-data "C:\Python312\Lib\site-packages\tkdnd;./tkdnd" --icon=picture.ico Jessica-Resizer.py"
 
 
 def drop(event):
