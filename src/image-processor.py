@@ -31,4 +31,16 @@ def process_images(folder_path, output_sizes):
     for file in os.listdir(folder_path):
         file_name, file_ext = os.path.splitext(file)
         if file_ext.lower() in EXTENTIONS:
+            image_path = os.path.join(folder_path, file)
 
+            for size in output_sizes:
+                output_path = os.path.join(
+                    output_folder, f"{file_name}@{size}px{file_ext}"
+                )
+                if file_ext.lower() == ".gif":
+                    frames = resize_gif(image_path, (size, size))
+                    save_images(frames, output_path)
+                else:
+                    resized_img = resize_image(image_path, (size, size))
+                    save_images(resized_img, output_path)
+    os.startfile(output_folder)
