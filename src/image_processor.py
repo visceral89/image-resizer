@@ -24,7 +24,6 @@ def save_images(image, output_path):
             save_all=True,
             append_images=image[1:1],
             loop=1,
-            duration=image.info["duration"],
         )
     else:
         image.save(output_path)

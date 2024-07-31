@@ -17,11 +17,12 @@ def create_main_window(root):
     label.pack(expand=True, fill="both", padx=10, pady=10)
 
     button = ttk.Button(root, text="Browse Folder", command=open_folder)
+    button.pack(pady=20)
 
     root.drop_target_register(DND_FILES)
-    root.dnd_bind("<<Drop>>", lambda event: on_drop(event, label))
+    root.dnd_bind("<<Drop>>", lambda event: on_drop(event, label, root))
 
 
-def on_drop(event, label):
+def on_drop(event, label, root):
     files = root.tk.splitlist(event.data)
     label["text"] = "\n".join(f for f in files)

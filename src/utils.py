@@ -5,7 +5,10 @@ from config import IMAGE_SIZES
 
 
 def drop(event):
-    return
+    folder_path = event.data.replace("{", "").replace("}", "")
+    if os.path.isdir(folder_path):
+        process_images(folder_path, IMAGE_SIZES)
+        os.startfile(os.path.join(folder_path, "resized"))
 
 
 def open_folder():
@@ -13,5 +16,3 @@ def open_folder():
     folder_selected = filedialog.askdirectory(initialdir=initial_directory)
     if folder_selected:
         process_images(folder_selected, IMAGE_SIZES)
-
-    return
