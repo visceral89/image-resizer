@@ -1,9 +1,11 @@
 from gui import create_main_window
-import customtkinter as ctk
+import tkinter as tk
+from tkinter import ttk
+from tkinterdnd2 import DND_FILES, TkinterDnD
 
 
 def main():
-    root = ctk.CTk()
+    root = tk.Tk()
     create_main_window(root)
     root.mainloop()
 
