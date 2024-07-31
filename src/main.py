@@ -5,7 +5,7 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 
 
 def main():
-    root = tk.Tk()
+    root = TkinterDnD.Tk()
     create_main_window(root)
     root.mainloop()
 
