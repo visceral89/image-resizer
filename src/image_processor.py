@@ -22,7 +22,7 @@ def save_images(image, output_path):
         image[0].save(
             output_path,
             save_all=True,
-            append_images=image[1:1],
+            append_images=image[1:],
             loop=1,
         )
     else:
