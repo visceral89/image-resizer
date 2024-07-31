@@ -1,5 +1,6 @@
 from PIL import Image, ImageSequence
 import os
+from config import EXTENTIONS
 
 
 def resize_image(image_path, output_size):
@@ -26,3 +27,8 @@ def save_images(image, output_path):
 def process_images(folder_path, output_sizes):
     output_folder = os.path.join(folder_path, "resized")
     os.makedirs(output_folder, exist_ok=True)
+
+    for file in os.listdir(folder_path):
+        file_name, file_ext = os.path.splitext(file)
+        if file_ext.lower() in EXTENTIONS:
+
