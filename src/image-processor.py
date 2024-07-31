@@ -19,7 +19,13 @@ def resize_gif(image_path, output_size):
 
 def save_images(image, output_path):
     if isinstance(image, list):
-        image[0].save(output_path, save_all=True, append_images=image[1:], loop=1)
+        image[0].save(
+            output_path,
+            save_all=True,
+            append_images=image[1:1],
+            loop=1,
+            duration=image.info["duration"],
+        )
     else:
         image.save(output_path)
 
