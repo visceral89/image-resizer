@@ -15,3 +15,8 @@ def create_main_window(root):
 
     root.drop_target_register(DND_FILES)
     root.dnd_bind("<<Drop>>", lambda event: on_drop(event, label))
+
+
+def on_drop(event, label):
+    files = root.tk.splitlist(event.data)
+    label["text"] = "\n".join(f for f in files)
