@@ -11,7 +11,27 @@ from PyQt5.QtCore import Qt
 from config import TITLE, WIDTH, HEIGHT
 from utils import open_folder, drop
 
-class DropLabel()
+
+class DropFrame(QFrame):
+    def __init__(self, parent=None):
+        super(DropFrame, self).__init__(parent)
+        self.setAcceptDrops(True)
+        self.initUI()
+
+    def initUI(self):
+        self.setStyleSheet("background-color: #f0f0f0;")  # Styling for visibility
+
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            event.accept()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event):
+        files = [url.toLocalFile() for url in event.mimeData().urls()]
+        print(
+            "Files dropped:", files
+        )
 
 
 def create_main_window():
