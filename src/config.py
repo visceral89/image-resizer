@@ -5,3 +5,5 @@ DEFAULT_OUTPUT_FOLDER = "resized_images"
 
 TITLE = "Jessica Resizer"
 WINMINSIZE = "800x600"
+HEIGHT = 600
+WIDTH = 800
