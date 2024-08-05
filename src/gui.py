@@ -9,7 +9,10 @@ def create_main_window(root):
     root.geometry(WINMINSIZE)
 
     style = ttk.Style()
-    style.theme_use("alt")
+    style.theme_use("default")
+
+    ## Styles
+    style.configure("TButton")
 
     drop_label = ttk.Label(root, text="Drop Folder Here", padding=10)
     drop_label.pack(expand=True, fill="both", padx=10, pady=10)
