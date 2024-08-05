@@ -4,4 +4,4 @@ EXTENTIONS = [".png", ".jpg", ".jpeg", ".gif"]
 DEFAULT_OUTPUT_FOLDER = "resized_images"
 
 TITLE = "Jessica Resizer"
-WINMINSIZE = "500x350"
+WINMINSIZE = "800x600"
