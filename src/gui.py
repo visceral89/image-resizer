@@ -1,7 +1,7 @@
 from tkinter import ttk
 from tkinterdnd2 import DND_FILES, TkinterDnD
 from config import TITLE, WINMINSIZE
-from utils import open_folder, drop  # Make sure to import the drop function
+from utils import open_folder, drop
 
 
 def create_main_window(root):
@@ -24,7 +24,4 @@ def create_main_window(root):
     button.pack(pady=20)
 
     root.drop_target_register(DND_FILES)
-    root.dnd_bind("<<Drop>>", drop)  # Using the drop function from utils directly
-
-
-# Update the drop function in utils.py to handle GUI feedback, e.g., updating the drop_label text.
+    root.dnd_bind("<<Drop>>", drop)
