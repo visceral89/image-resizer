@@ -5,10 +5,13 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QWidget,
+    QFrame,
 )
 from PyQt5.QtCore import Qt
 from config import TITLE, WIDTH, HEIGHT
 from utils import open_folder, drop
+
+class DropLabel()
 
 
 def create_main_window():
@@ -23,18 +26,36 @@ def create_main_window():
     central_widget = QWidget()
     window.setCentralWidget(central_widget)
 
-    layout = QVBoxLayout()
+    main_layout = QVBoxLayout()
 
-    
+    # Content Frame
+    content_frame = QFrame()
+    content_layout = QVBoxLayout(content_frame)
+    instructions_label = QLabel(
+        "Drag a folder to the drop area or select a folder below."
+    )
+    instructions_label.setAlignment(Qt.AlignCenter)
+    content_layout.addWidget(instructions_label)
 
-    drop_label = ttk.Label(root, text="Drop Folder Here", padding=10)
-    drop_label.pack(expand=True, fill="both", padx=10, pady=10)
+    browse_button = QPushButton("Browse Folder")
+    browse_button.clicked.connect(lambda: print("Browse Folder Clicked"))
+    content_layout.addWidget(browse_button)
 
-    or_label = ttk.Label(root, text="or", padding=10)
-    or_label.pack(expand=True, fill="both", padx=10, pady=10)
+    # Drop Frame
+    drag_frame = QFrame()
+    drag_layout = QVBoxLayout(drag_frame)
+    drop_label = QLabel("Drop Files Here")
+    drop_label.setAlignment(Qt.AlignCenter)
+    drop_label.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)
+    drop_label.setAcceptDrops(True)
+    drop_label.setMinimumHeight(200)  # Adjust size
+    drag_layout.addWidget(drop_label)
 
-    button = ttk.Button(root, text="Browse Folder", command=open_folder)
-    button.pack(pady=20)
+    ## Add frames to the main layout with size ratio
+    main_layout.addWidget(content_frame, 2)  # 40%
+    main_layout.addWidget(drag_frame, 3)  # 60%
 
-    root.drop_target_register(DND_FILES)
-    root.dnd_bind("<<Drop>>", drop)
+    central_widget.setLayout(main_layout)
+
+    window.show()
+    app.exec_()
