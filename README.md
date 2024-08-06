@@ -16,18 +16,17 @@ This Image Resizer Tool is a desktop application designed to help users quickly 
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3.12
 - Pillow library
-- customtkinter library
-- tkinterdnd2 library
+- PyQt5 5.15.11
 
 ### Usage
 
 1. Run the script:
 
 ```bash
-python script_name.py
+python main.py
 ```
 
-2. Use the GUI to drag and drop a folder onto the window or use the 'Select Folder' button to choose a folder.
+2. Use the GUI to drag and drop a folder onto the window or use the 'Browse Folder' button to choose a folder.
 3. Resized images will be saved in a 'resized' subfolder within the original folder. Each file will be named according to the format filename@size.extension.
