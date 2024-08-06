@@ -8,8 +8,10 @@ from PyQt5.QtWidgets import (
     QFrame,
 )
 from PyQt5.QtCore import Qt
-from config import TITLE, WIDTH, HEIGHT
+from config import TITLE, WIDTH, HEIGHT, IMAGE_SIZES
 from utils import open_folder, drop
+import os
+from image_processor import process_images
 
 
 class DropFrame(QFrame):
@@ -28,16 +30,30 @@ class DropFrame(QFrame):
             event.ignore()
 
     def dropEvent(self, event):
-        files = [url.toLocalFile() for url in event.mimeData().urls()]
-        print(
-            "Files dropped:", files
-        )
+        folder_paths = [
+            url.toLocalFile()
+            for url in event.mimeData().urls()
+            if os.path.isdir(url.toLocalFile())
+        ]
+        for folder_path in folder_paths:
+            process_images(folder_path, IMAGE_SIZES)
+            self.openFolder(os.path.join(folder_path, "resized"))
+
+    def openFolder(self, path):
+        import subprocess
+        import sys
+
+        if sys.platform == "darwin":
+            subprocess.call(["open", path])
+        elif sys.platform == "linux":
+            subprocess.call(["xdg-open"], path)
+        else:
+            os.startfile(path)
 
 
 def create_main_window():
 
     # Create the main window & app.
-    app = QApplication([])
     window = QMainWindow()
 
     # Set window attributes.
@@ -62,14 +78,8 @@ def create_main_window():
     content_layout.addWidget(browse_button)
 
     # Drop Frame
-    drag_frame = QFrame()
-    drag_layout = QVBoxLayout(drag_frame)
-    drop_label = QLabel("Drop Files Here")
-    drop_label.setAlignment(Qt.AlignCenter)
-    drop_label.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)
-    drop_label.setAcceptDrops(True)
-    drop_label.setMinimumHeight(200)  # Adjust size
-    drag_layout.addWidget(drop_label)
+    drag_frame = DropFrame()
+    main_layout.addWidget(drag_frame, 3)
 
     ## Add frames to the main layout with size ratio
     main_layout.addWidget(content_frame, 2)  # 40%
@@ -77,5 +87,4 @@ def create_main_window():
 
     central_widget.setLayout(main_layout)
 
-    window.show()
-    app.exec_()
+    return window

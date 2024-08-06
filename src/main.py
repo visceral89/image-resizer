@@ -1,13 +1,12 @@
 from gui import create_main_window
-import tkinter as tk
-from tkinter import ttk
-from tkinterdnd2 import DND_FILES, TkinterDnD
+from PyQt5.QtWidgets import QApplication
 
 
 def main():
-    root = TkinterDnD.Tk()
-    create_main_window(root)
-    root.mainloop()
+    app = QApplication([])
+    window = create_main_window()
+    window.show()
+    app.exec()
 
 
 if __name__ == "__main__":
