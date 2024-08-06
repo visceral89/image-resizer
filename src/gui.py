@@ -74,7 +74,7 @@ def create_main_window():
     content_layout.addWidget(instructions_label)
 
     browse_button = QPushButton("Browse Folder")
-    browse_button.clicked.connect(lambda: print("Browse Folder Clicked"))
+    browse_button.clicked.connect(open_folder)
     content_layout.addWidget(browse_button)
 
     # Drop Frame

@@ -13,7 +13,7 @@ def drop(event):
 
 def open_folder():
     initial_directory = os.path.expanduser("~/Pictures")
-    folder_selected, _ = QFileDialog.getExistingDirectory(
+    folder_selected = QFileDialog.getExistingDirectory(
         None, "Select Folder", initial_directory
     )
     if folder_selected:
