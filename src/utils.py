@@ -1,7 +1,7 @@
 import os
-from tkinter import filedialog
 from image_processor import process_images
 from config import IMAGE_SIZES
+from PyQt5.QtWidgets import QFileDialog
 
 
 def drop(event):
@@ -13,6 +13,8 @@ def drop(event):
 
 def open_folder():
     initial_directory = os.path.expanduser("~/Pictures")
-    folder_selected = filedialog.askdirectory(initialdir=initial_directory)
+    folder_selected = QFileDialog.getExistingDirectory(
+        None, "Select Folder", initial_directory
+    )
     if folder_selected:
         process_images(folder_selected, IMAGE_SIZES)
