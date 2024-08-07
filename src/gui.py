@@ -15,6 +15,9 @@ import os
 from image_processor import process_images
 
 
+
+
+
 class DropFrame(QFrame):
     def __init__(self, parent=None):
         super(DropFrame, self).__init__(parent)
