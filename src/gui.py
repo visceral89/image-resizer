@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (
     QLabel,
     QPushButton,
     QVBoxLayout,
+    QHBoxLayout,
     QWidget,
     QFrame,
 )
@@ -46,7 +47,7 @@ class DropFrame(QFrame):
         if sys.platform == "darwin":
             subprocess.call(["open", path])
         elif sys.platform == "linux":
-            subprocess.call(["xdg-open"], path)
+            subprocess.call(["xdg-open", path])
         else:
             os.startfile(path)
 
@@ -59,31 +60,33 @@ def create_main_window():
     # Set window attributes.
     window.setWindowTitle(TITLE)
     window.setMinimumSize(WIDTH, HEIGHT)
-    central_widget = QWidget()
+
+    # Central Widget, holds main layout.
+    central_widget = QWidget(window)
     window.setCentralWidget(central_widget)
 
-    main_layout = QVBoxLayout()
+    main_layout = QHBoxLayout()
 
-    # Content Frame
-    content_frame = QFrame()
-    content_layout = QVBoxLayout(content_frame)
-    instructions_label = QLabel(
-        "Drag a folder to the drop area or select a folder below."
-    )
-    instructions_label.setAlignment(Qt.AlignCenter)
-    content_layout.addWidget(instructions_label)
+    # Column 1
+    left_col_layout = QVBoxLayout()
+    left_col_frame = QFrame()
+    left_col_frame.setLayout(left_col_layout)
+    left_col_label = QLabel("Drag a folder to the drop area or select a folder below.")
+    left_col_button = QPushButton("Browse Folder")
+    left_col_button.clicked.connect(open_folder)
+    left_col_layout.addWidget(left_col_label)
+    left_col_layout.addWidget(left_col_button)
 
-    browse_button = QPushButton("Browse Folder")
-    browse_button.clicked.connect(open_folder)
-    content_layout.addWidget(browse_button)
-
-    # Drop Frame
-    drag_frame = DropFrame()
-    main_layout.addWidget(drag_frame, 3)
+    # Column 2
+    right_col_layout = QVBoxLayout()
+    right_col_frame = DropFrame()
+    right_col_frame.setLayout(right_col_layout)
+    right_col_label = QLabel("Drop folder here!")
+    right_col_layout.addWidget(right_col_label)
 
     ## Add frames to the main layout with size ratio
-    main_layout.addWidget(content_frame, 2)  # 40%
-    main_layout.addWidget(drag_frame, 3)  # 60%
+    main_layout.addWidget(left_col_frame, 2)  # 40%
+    main_layout.addWidget(right_col_frame, 3)  # 60%
 
     central_widget.setLayout(main_layout)
 
