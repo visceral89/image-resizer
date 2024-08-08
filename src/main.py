@@ -9,8 +9,8 @@ def load_stylesheet(path):
 
 def main():
     app = QApplication([])
-    stylesheet = load_stylesheet("styles.qss")
-    app.setStyleSheet(stylesheet)
+    # stylesheet = load_stylesheet("styles.qss")
+    # app.setStyleSheet(stylesheet)
     window = create_main_window()
     window.show()
     app.exec()

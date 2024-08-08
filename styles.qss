@@ -1,9 +1,0 @@
-
-
-QMainWindow {
-    background-color: #dad7cd;
-}
-
-QWidget{
-    background-color: #FFF
-}
