@@ -1,5 +1,9 @@
-#20BF55 - green
+
 
 QMainWindow {
-    background-color: #4C5454;
+    background-color: #dad7cd;
+}
+
+QWidget{
+    background-color: #FFF
 }

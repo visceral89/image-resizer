@@ -15,9 +15,6 @@ import os
 from image_processor import process_images
 
 
-
-
-
 class DropFrame(QFrame):
     def __init__(self, parent=None):
         super(DropFrame, self).__init__(parent)
@@ -68,28 +65,9 @@ def create_main_window():
     central_widget = QWidget(window)
     window.setCentralWidget(central_widget)
 
-    main_layout = QHBoxLayout()
+    main_layout = QVBoxLayout()
 
-    # Column 1
-    left_col_layout = QVBoxLayout()
-    left_col_frame = QFrame()
-    left_col_frame.setLayout(left_col_layout)
-    left_col_label = QLabel("Drag a folder to the drop area or select a folder below.")
-    left_col_button = QPushButton("Browse Folder")
-    left_col_button.clicked.connect(open_folder)
-    left_col_layout.addWidget(left_col_label)
-    left_col_layout.addWidget(left_col_button)
-
-    # Column 2
-    right_col_layout = QVBoxLayout()
-    right_col_frame = DropFrame()
-    right_col_frame.setLayout(right_col_layout)
-    right_col_label = QLabel("Drop folder here!")
-    right_col_layout.addWidget(right_col_label)
-
-    ## Add frames to the main layout with size ratio
-    main_layout.addWidget(left_col_frame, 2)  # 40%
-    main_layout.addWidget(right_col_frame, 3)  # 60%
+    ## Start new Design
 
     central_widget.setLayout(main_layout)
 
