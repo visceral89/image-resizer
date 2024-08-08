@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (
     QLabel,
     QPushButton,
     QVBoxLayout,
+    QHBoxLayout,
     QWidget,
     QFrame,
 )
@@ -46,7 +47,7 @@ class DropFrame(QFrame):
         if sys.platform == "darwin":
             subprocess.call(["open", path])
         elif sys.platform == "linux":
-            subprocess.call(["xdg-open"], path)
+            subprocess.call(["xdg-open", path])
         else:
             os.startfile(path)
 
@@ -59,31 +60,44 @@ def create_main_window():
     # Set window attributes.
     window.setWindowTitle(TITLE)
     window.setMinimumSize(WIDTH, HEIGHT)
-    central_widget = QWidget()
+
+    # Central Widget, holds main layout.
+    central_widget = QWidget(window)
     window.setCentralWidget(central_widget)
 
     main_layout = QVBoxLayout()
 
-    # Content Frame
-    content_frame = QFrame()
-    content_layout = QVBoxLayout(content_frame)
-    instructions_label = QLabel(
-        "Drag a folder to the drop area or select a folder below."
+    ## Start new Design
+
+    # Header
+    text_area = QVBoxLayout()
+    title_text = QLabel("Welcome to emote and image resizer")
+    title_text.setAlignment(Qt.AlignCenter)
+    subtitle_text = QLabel(
+        "Upload folder with files. The resizer supports .png, .jpg, .jpeg and .gif"
     )
-    instructions_label.setAlignment(Qt.AlignCenter)
-    content_layout.addWidget(instructions_label)
+    subtitle_text.setAlignment(Qt.AlignCenter)
+
+    main_layout.addWidget(title_text)
+    main_layout.addWidget(subtitle_text)
+
+    # Drag and Drop Area
+    drag_frame = DropFrame()
+    drag_frame.setFrameShape(QFrame.StyledPanel)
+    drag_frame.setFrameShadow(QFrame.Raised)
+    drag_frame.setStyleSheet("border: 2px dashed #ccc;")
+
+    drag_layout = QVBoxLayout()
+    drag_label = QLabel("Drag and Drop Folder here")
+    drag_label.setAlignment(Qt.AlignCenter)
 
     browse_button = QPushButton("Browse Folder")
-    browse_button.clicked.connect(open_folder)
-    content_layout.addWidget(browse_button)
+    browse_button.setStyleSheet("background-color: #dad7cd; color: white;")
+    drag_layout.addWidget(drag_label)
+    drag_layout.addWidget(browse_button)
+    drag_frame.setLayout(drag_layout)
 
-    # Drop Frame
-    drag_frame = DropFrame()
-    main_layout.addWidget(drag_frame, 3)
-
-    ## Add frames to the main layout with size ratio
-    main_layout.addWidget(content_frame, 2)  # 40%
-    main_layout.addWidget(drag_frame, 3)  # 60%
+    main_layout.addWidget(drag_frame)
 
     central_widget.setLayout(main_layout)
 

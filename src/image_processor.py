@@ -5,13 +5,13 @@ from config import EXTENTIONS
 
 def resize_image(image_path, output_size):
     with Image.open(image_path) as img:
-        return img.resize(output_size, Image.LANCZOS)
+        return img.resize(output_size)
 
 
 def resize_gif(image_path, output_size):
     with Image.open(image_path) as img:
         frames = [
-            frame.convert("RGBA").resize(output_size, Image.LANCZOS)
+            frame.convert("RGBA").resize(output_size)
             for frame in ImageSequence.Iterator(img)
         ]
     return frames
