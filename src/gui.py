@@ -69,6 +69,29 @@ def create_main_window():
 
     ## Start new Design
 
+    # Header
+    text_area = QVBoxLayout()
+    title_text = QLabel("Welcome to emote and image resizer")
+    title_text.setAlignment(Qt.AlignCenter)
+    subtitle_text = QLabel(
+        "Upload folder with files. The resizer supports .png, .jpg, .jpeg and .gif"
+    )
+    subtitle_text.setAlignment(Qt.AlignCenter)
+
+    main_layout.addWidget(title_text)
+    main_layout.addWidget(subtitle_text)
+
+    # Drag and Drop Area
+    drag_frame = DropFrame()
+    drag_frame.setFrameShape(QFrame.StyledPanel)
+    drag_frame.setFrameShadow(QFrame.Raised)
+    drag_frame.setStyleSheet("border: 2px dashed #ccc;")
+
+    drag_layout = QVBoxLayout()
+    drag_label = QLabel("Drag and Drop Folder here")
+    drag_label.setAlignment(Qt.AlignCenter)
+    
+
     central_widget.setLayout(main_layout)
 
     return window
