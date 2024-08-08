@@ -90,7 +90,14 @@ def create_main_window():
     drag_layout = QVBoxLayout()
     drag_label = QLabel("Drag and Drop Folder here")
     drag_label.setAlignment(Qt.AlignCenter)
-    
+
+    browse_button = QPushButton("Browse Folder")
+    browse_button.setStyleSheet("background-color: #dad7cd; color: white;")
+    drag_layout.addWidget(drag_label)
+    drag_layout.addWidget(browse_button)
+    drag_frame.setLayout(drag_layout)
+
+    main_layout.addWidget(drag_frame)
 
     central_widget.setLayout(main_layout)
 
